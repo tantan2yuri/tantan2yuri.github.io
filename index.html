@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="T2Y Applications - Free Windows applications for AI image workflows, LoRA dataset preparation, and image management."
+    content="T2Y Applications - Free Windows applications for AI image workflows, LoRA dataset preparation, image browsing and management."
   >
 
   <style>
@@ -27,8 +27,11 @@
       --primary: #4C6EF5;
       --primary-hover: #5C7CFA;
 
-      --secondary: #1098AD;
+      --cyan: #1098AD;
+      --cyan-hover: #15AABF;
+
       --purple: #845EF7;
+      --purple-hover: #9775FA;
 
       --radius: 14px;
     }
@@ -43,6 +46,7 @@
 
     body {
       margin: 0;
+
       font-family:
         Inter,
         -apple-system,
@@ -56,8 +60,8 @@
       background:
         radial-gradient(
           circle at top,
-          rgba(76, 110, 245, 0.10),
-          transparent 420px
+          rgba(76, 110, 245, 0.12),
+          transparent 460px
         ),
         var(--bg);
 
@@ -65,28 +69,28 @@
       line-height: 1.7;
     }
 
-    a {
-      color: inherit;
+    img {
+      max-width: 100%;
     }
 
     .container {
-      width: min(1100px, calc(100% - 40px));
+      width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
     }
 
-    /* =========================================================
+    /* =========================
        HERO
-       ========================================================= */
+       ========================= */
 
     .hero {
-      padding: 100px 0 70px;
+      padding: 96px 0 68px;
       text-align: center;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
 
       padding: 7px 13px;
       margin-bottom: 24px;
@@ -97,15 +101,16 @@
       background: rgba(76, 110, 245, 0.08);
 
       color: #AFC0FF;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
-      letter-spacing: 0.03em;
     }
 
     .brand-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
+
       background: var(--primary);
       box-shadow: 0 0 12px rgba(76, 110, 245, 0.8);
     }
@@ -113,7 +118,7 @@
     .hero h1 {
       margin: 0;
 
-      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-size: clamp(2.8rem, 7vw, 5.2rem);
       line-height: 1.05;
       letter-spacing: -0.045em;
     }
@@ -123,7 +128,7 @@
     }
 
     .hero-lead {
-      max-width: 720px;
+      max-width: 740px;
       margin: 28px auto 0;
 
       color: var(--subtext);
@@ -132,23 +137,23 @@
 
     .hero-lead-jp {
       max-width: 760px;
-      margin: 10px auto 0;
+      margin: 8px auto 0;
 
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
     .badges {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 8px;
 
-      margin-top: 30px;
+      margin-top: 28px;
     }
 
     .badge {
-      padding: 6px 12px;
+      padding: 6px 11px;
 
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -156,15 +161,15 @@
       background: rgba(37, 38, 43, 0.75);
 
       color: var(--subtext);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
 
-    /* =========================================================
+    /* =========================
        SECTION
-       ========================================================= */
+       ========================= */
 
     .section {
-      padding: 25px 0 70px;
+      padding: 24px 0 72px;
     }
 
     .section-header {
@@ -175,10 +180,10 @@
       margin-bottom: 6px;
 
       color: var(--primary-hover);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
     .section-title {
@@ -191,24 +196,12 @@
       color: var(--subtext);
     }
 
-    /* =========================================================
-       APP CARDS
-       ========================================================= */
+    /* =========================
+       APP
+       ========================= */
 
-    .apps {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .app-card {
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-
-      min-height: 420px;
-      padding: 30px;
+    .app {
+      margin-bottom: 34px;
 
       overflow: hidden;
 
@@ -216,92 +209,59 @@
       border-radius: var(--radius);
 
       background: var(--card);
-
-      transition:
-        transform 0.18s ease,
-        border-color 0.18s ease,
-        background 0.18s ease;
     }
 
-    .app-card:hover {
-      transform: translateY(-4px);
-      border-color: #4A4C54;
-      background: var(--card-hover);
+    .app-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 0;
     }
 
-    .app-card::before {
-      content: "";
-
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 3px;
-
-      background: var(--primary);
+    .app-info {
+      padding: 32px;
     }
 
-    .app-card.tiv::before {
-      background: var(--secondary);
-    }
-
-    .app-top {
+    .app-title-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 17px;
 
-      gap: 16px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .app-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 68px;
+      height: 68px;
 
-      width: 58px;
-      height: 58px;
+      flex: 0 0 68px;
 
-      border-radius: 13px;
-
-      background: rgba(76, 110, 245, 0.13);
-      border: 1px solid rgba(76, 110, 245, 0.25);
-
-      color: #9FB2FF;
-      font-weight: 800;
-      font-size: 1.15rem;
-    }
-
-    .tiv .app-icon {
-      color: #7BD8E4;
-      background: rgba(16, 152, 173, 0.13);
-      border-color: rgba(16, 152, 173, 0.25);
-    }
-
-    .free-label {
-      padding: 5px 10px;
+      overflow: hidden;
 
       border: 1px solid var(--border);
-      border-radius: 999px;
+      border-radius: 15px;
 
-      color: var(--subtext);
-      font-size: 0.76rem;
+      background: var(--surface);
     }
 
-    .app-card h2 {
-      margin: 0 0 4px;
-      font-size: 1.55rem;
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
-    .app-name-jp {
+    .app-title h2 {
+      margin: 0 0 2px;
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .app-subtitle {
       color: var(--muted);
-      font-size: 0.87rem;
-      margin-bottom: 18px;
+      font-size: 0.9rem;
     }
 
     .description {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       color: var(--subtext);
     }
 
@@ -320,13 +280,14 @@
     }
 
     .feature {
-      padding: 4px 9px;
+      padding: 5px 9px;
 
       border-radius: 6px;
+
       background: var(--surface);
 
       color: var(--subtext);
-      font-size: 0.76rem;
+      font-size: 0.75rem;
     }
 
     .actions {
@@ -334,8 +295,7 @@
       flex-wrap: wrap;
       gap: 9px;
 
-      margin-top: auto;
-      padding-top: 28px;
+      margin-top: 28px;
     }
 
     .button {
@@ -344,7 +304,7 @@
       justify-content: center;
 
       min-height: 42px;
-      padding: 9px 15px;
+      padding: 9px 16px;
 
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -359,10 +319,12 @@
 
       transition:
         background 0.15s ease,
-        border-color 0.15s ease;
+        border-color 0.15s ease,
+        transform 0.15s ease;
     }
 
     .button:hover {
+      transform: translateY(-1px);
       background: #303136;
       border-color: #555860;
     }
@@ -374,23 +336,120 @@
     }
 
     .button.primary:hover {
-      border-color: var(--primary-hover);
       background: var(--primary-hover);
+      border-color: var(--primary-hover);
     }
 
     .tiv .button.primary {
-      background: var(--secondary);
-      border-color: var(--secondary);
+      background: var(--cyan);
+      border-color: var(--cyan);
     }
 
     .tiv .button.primary:hover {
-      background: #15AABF;
-      border-color: #15AABF;
+      background: var(--cyan-hover);
+      border-color: var(--cyan-hover);
     }
 
-    /* =========================================================
+    /* =========================
+       SPLASH
+       ========================= */
+
+    .splash-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 340px;
+      padding: 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(76, 110, 245, 0.07),
+          rgba(0, 0, 0, 0)
+        ),
+        var(--surface);
+    }
+
+    .tiv .splash-wrap {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(16, 152, 173, 0.08),
+          rgba(0, 0, 0, 0)
+        ),
+        var(--surface);
+    }
+
+    .splash-wrap img {
+      max-height: 280px;
+      width: auto;
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.30);
+    }
+
+    /* =========================
+       SCREENSHOTS
+       ========================= */
+
+    .screenshots {
+      padding: 24px 28px 30px;
+
+      border-top: 1px solid var(--border);
+
+      background: #202126;
+    }
+
+    .screenshots-title {
+      margin-bottom: 14px;
+
+      color: var(--subtext);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .screenshot {
+      display: block;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--surface);
+
+      transition:
+        transform 0.17s ease,
+        border-color 0.17s ease;
+    }
+
+    .screenshot:hover {
+      transform: translateY(-3px);
+      border-color: #555860;
+    }
+
+    .screenshot img {
+      display: block;
+
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    /* =========================
        SUPPORT
-       ========================================================= */
+       ========================= */
 
     .support-card {
       display: grid;
@@ -398,7 +457,6 @@
       align-items: center;
       gap: 40px;
 
-      margin-top: 10px;
       padding: 34px;
 
       border: 1px solid var(--border);
@@ -407,7 +465,7 @@
       background:
         linear-gradient(
           135deg,
-          rgba(132, 94, 247, 0.08),
+          rgba(132, 94, 247, 0.09),
           rgba(76, 110, 245, 0.04)
         ),
         var(--card);
@@ -431,6 +489,7 @@
 
     .support-button {
       white-space: nowrap;
+
       padding: 12px 20px;
 
       border-radius: 9px;
@@ -444,15 +503,15 @@
     }
 
     .support-button:hover {
-      background: #9775FA;
+      background: var(--purple-hover);
     }
 
-    /* =========================================================
+    /* =========================
        FOOTER
-       ========================================================= */
+       ========================= */
 
     footer {
-      padding: 26px 0 42px;
+      padding: 27px 0 42px;
 
       border-top: 1px solid var(--border);
 
@@ -462,8 +521,8 @@
 
     .footer-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 20px;
 
       flex-wrap: wrap;
@@ -484,18 +543,41 @@
       color: var(--text);
     }
 
-    /* =========================================================
+    /* =========================
        MOBILE
-       ========================================================= */
+       ========================= */
 
-    @media (max-width: 760px) {
+    @media (max-width: 850px) {
 
-      .hero {
-        padding-top: 70px;
+      .app-main {
+        grid-template-columns: 1fr;
       }
 
-      .apps {
+      .splash-wrap {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 700px) {
+
+      .hero {
+        padding-top: 68px;
+      }
+
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .app-info {
+        padding: 24px;
+      }
+
+      .screenshot-grid {
         grid-template-columns: 1fr;
+      }
+
+      .screenshot img {
+        aspect-ratio: auto;
       }
 
       .support-card {
@@ -518,9 +600,7 @@
 
   <main>
 
-    <!-- =======================================================
-         HERO
-         ======================================================= -->
+    <!-- HERO -->
 
     <section class="hero">
       <div class="container">
@@ -555,9 +635,7 @@
     </section>
 
 
-    <!-- =======================================================
-         APPLICATIONS
-         ======================================================= -->
+    <!-- APPLICATIONS -->
 
     <section class="section">
       <div class="container">
@@ -579,150 +657,285 @@
         </div>
 
 
-        <div class="apps">
+        <!-- =====================
+             LTA
+             ===================== -->
 
-          <!-- LTA -->
+        <article class="app">
 
-          <article class="app-card">
+          <div class="app-main">
 
-            <div class="app-top">
+            <div class="app-info">
 
-              <div class="app-icon">
-                LTA
+              <div class="app-title-row">
+
+                <div class="app-icon">
+                  <img
+                    src="/images/assets/LTA/lta_icon.png"
+                    alt="LoRA Tagging Assistant icon"
+                  >
+                </div>
+
+                <div class="app-title">
+                  <h2>LoRA Tagging Assistant</h2>
+                  <div class="app-subtitle">
+                    LTA / LoRA学習用データセット作成支援
+                  </div>
+                </div>
+
               </div>
 
-              <div class="free-label">
-                FREE
+              <p class="description">
+                A Windows application for tagging, captioning,
+                and preparing image datasets for LoRA training.
+              </p>
+
+              <p class="description-jp">
+                画像への自動タグ付け、タグ編集、キャプション作成など、
+                LoRA学習用データセットの作成を支援します。
+              </p>
+
+              <div class="features">
+                <span class="feature">Auto Tagging</span>
+                <span class="feature">Captioning</span>
+                <span class="feature">Dataset Tools</span>
+                <span class="feature">LoRA</span>
               </div>
 
-            </div>
+              <div class="actions">
 
-            <h2>
-              LoRA Tagging Assistant
-            </h2>
+                <a
+                  class="button primary"
+                  href="https://github.com/tantan2yuri/lora-tagging-assistant/releases/latest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download
+                </a>
 
-            <div class="app-name-jp">
-              LoRA学習用データセット作成支援
-            </div>
+                <a
+                  class="button"
+                  href="https://github.com/tantan2yuri/lora-tagging-assistant"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
 
-            <p class="description">
-              A Windows application for tagging, captioning
-              and preparing image datasets for LoRA training.
-            </p>
-
-            <p class="description-jp">
-              画像への自動タグ付け、タグ編集、キャプション作成など、
-              LoRA学習用データセットの作成を支援します。
-            </p>
-
-            <div class="features">
-              <span class="feature">Auto Tagging</span>
-              <span class="feature">Captioning</span>
-              <span class="feature">Dataset Tools</span>
-              <span class="feature">LoRA</span>
-            </div>
-
-            <div class="actions">
-
-              <a
-                class="button primary"
-                href="https://github.com/tantan2yuri/lora-tagging-assistant/releases/latest"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download
-              </a>
-
-              <a
-                class="button"
-                href="https://github.com/tantan2yuri/lora-tagging-assistant"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- TIV -->
-
-          <article class="app-card tiv">
-
-            <div class="app-top">
-
-              <div class="app-icon">
-                <img src="assets/icons/lta.png" alt="LoRA Tagging Assistant icon">
-              </div>
-
-              <div class="free-label">
-                FREE
               </div>
 
             </div>
 
-            <h2>
-              T2Y Image Viewer
-            </h2>
 
-            <div class="app-name-jp">
-              画像ビューア / ライブラリ管理
-            </div>
-
-            <p class="description">
-              A fast Windows image viewer and library manager
-              designed for large image collections.
-            </p>
-
-            <p class="description-jp">
-              大量の画像を快適に閲覧・整理・検索し、
-              メタデータやタグを管理できる画像ビューアです。
-            </p>
-
-            <div class="features">
-              <span class="feature">Image Viewer</span>
-              <span class="feature">Tag Search</span>
-              <span class="feature">Metadata</span>
-              <span class="feature">Large Libraries</span>
-            </div>
-
-            <div class="actions">
+            <div class="splash-wrap">
 
               <a
-                class="button primary"
-                href="https://github.com/tantan2yuri/T2Y-Image-Viewer/releases/latest"
+                href="/images/assets/LTA/lta_splash.png"
                 target="_blank"
-                rel="noopener noreferrer"
               >
-                Download
-              </a>
-
-              <a
-                class="button"
-                href="https://github.com/tantan2yuri/T2Y-Image-Viewer"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
+                <img
+                  src="/images/assets/LTA/lta_splash.png"
+                  alt="LoRA Tagging Assistant"
+                >
               </a>
 
             </div>
 
-          </article>
+          </div>
 
-        </div>
+
+          <div class="screenshots">
+
+            <div class="screenshots-title">
+              Screenshots
+            </div>
+
+            <div class="screenshot-grid">
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/LTA/LTA_001.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/LTA/LTA_001.png"
+                  alt="LoRA Tagging Assistant screenshot 1"
+                >
+              </a>
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/LTA/LTA_002.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/LTA/LTA_002.png"
+                  alt="LoRA Tagging Assistant screenshot 2"
+                >
+              </a>
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/LTA/LTA_003.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/LTA/LTA_003.png"
+                  alt="LoRA Tagging Assistant screenshot 3"
+                >
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- =====================
+             TIV
+             ===================== -->
+
+        <article class="app tiv">
+
+          <div class="app-main">
+
+            <div class="app-info">
+
+              <div class="app-title-row">
+
+                <div class="app-icon">
+                  <img
+                    src="/images/assets/TIV/TIV_icon.png"
+                    alt="T2Y Image Viewer icon"
+                  >
+                </div>
+
+                <div class="app-title">
+                  <h2>T2Y Image Viewer</h2>
+
+                  <div class="app-subtitle">
+                    TIV / 画像ビューア・ライブラリ管理
+                  </div>
+                </div>
+
+              </div>
+
+              <p class="description">
+                A fast Windows image viewer and library manager
+                for browsing, organizing, searching,
+                and tagging large image collections.
+              </p>
+
+              <p class="description-jp">
+                大量の画像を快適に閲覧・整理・検索し、
+                メタデータやタグを管理できる画像ビューアです。
+              </p>
+
+              <div class="features">
+                <span class="feature">Image Viewer</span>
+                <span class="feature">Tag Search</span>
+                <span class="feature">Metadata</span>
+                <span class="feature">Large Libraries</span>
+              </div>
+
+              <div class="actions">
+
+                <a
+                  class="button primary"
+                  href="https://github.com/tantan2yuri/T2Y-Image-Viewer/releases/latest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download
+                </a>
+
+                <a
+                  class="button"
+                  href="https://github.com/tantan2yuri/T2Y-Image-Viewer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="splash-wrap">
+
+              <a
+                href="/images/assets/TIV/TIV_splash.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/assets/TIV/TIV_splash.png"
+                  alt="T2Y Image Viewer"
+                >
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <div class="screenshots">
+
+            <div class="screenshots-title">
+              Screenshots
+            </div>
+
+            <div class="screenshot-grid">
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/TIV/TIV_001.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/TIV/TIV_001.png"
+                  alt="T2Y Image Viewer screenshot 1"
+                >
+              </a>
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/TIV/TIV_002.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/TIV/TIV_002.png"
+                  alt="T2Y Image Viewer screenshot 2"
+                >
+              </a>
+
+              <a
+                class="screenshot"
+                href="/images/screenshots/TIV/TIV_003.png"
+                target="_blank"
+              >
+                <img
+                  src="/images/screenshots/TIV/TIV_003.png"
+                  alt="T2Y Image Viewer screenshot 3"
+                >
+              </a>
+
+            </div>
+
+          </div>
+
+        </article>
 
       </div>
     </section>
 
 
-    <!-- =======================================================
-         SUPPORT
-         ======================================================= -->
+    <!-- SUPPORT -->
 
     <section class="section">
+
       <div class="container">
 
         <div class="support-card">
@@ -742,9 +955,9 @@
             </p>
 
             <p>
-              If you find these apps useful,
+              If you find these applications useful,
               you can optionally support continued development,
-              testing and improvements.
+              testing, maintenance, and improvements.
             </p>
 
             <p class="support-note">
@@ -767,14 +980,13 @@
         </div>
 
       </div>
+
     </section>
 
   </main>
 
 
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
+  <!-- FOOTER -->
 
   <footer>
 
