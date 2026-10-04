@@ -8,28 +8,43 @@
 
   <meta
     name="description"
-    content="Official website for T2Y Applications. Free Windows tools for AI image workflows, LoRA dataset preparation, and image management."
+    content="T2Y Applications - Free Windows applications for AI image workflows, LoRA dataset preparation, and image management."
   >
 
   <style>
     :root {
-      --bg: #f4f5f7;
-      --card: #ffffff;
-      --text: #202124;
-      --subtext: #666a73;
-      --border: #dfe2e7;
-      --accent: #4c6ef5;
-      --accent-hover: #3b5bdb;
-      --soft: #f8f9fa;
+      --bg: #111214;
+      --surface: #1A1B1E;
+      --card: #25262B;
+      --card-hover: #2C2D33;
+
+      --text: #ECEFEE;
+      --subtext: #A2A6AD;
+      --muted: #777B82;
+
+      --border: #35363C;
+
+      --primary: #4C6EF5;
+      --primary-hover: #5C7CFA;
+
+      --secondary: #1098AD;
+      --purple: #845EF7;
+
+      --radius: 14px;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family:
+        Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -37,139 +52,463 @@
         "Yu Gothic",
         Meiryo,
         sans-serif;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(76, 110, 245, 0.10),
+          transparent 420px
+        ),
+        var(--bg);
+
       color: var(--text);
-      background: var(--bg);
       line-height: 1.7;
     }
 
+    a {
+      color: inherit;
+    }
+
     .container {
-      max-width: 1050px;
+      width: min(1100px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 24px;
     }
 
-    header {
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      padding: 100px 0 70px;
       text-align: center;
-      margin-bottom: 48px;
     }
 
-    header h1 {
-      margin: 0 0 12px;
-      font-size: 2.3rem;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 7px 13px;
+      margin-bottom: 24px;
+
+      border: 1px solid rgba(76, 110, 245, 0.32);
+      border-radius: 999px;
+
+      background: rgba(76, 110, 245, 0.08);
+
+      color: #AFC0FF;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
-    header p {
-      margin: 6px 0;
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 12px rgba(76, 110, 245, 0.8);
+    }
+
+    .hero h1 {
+      margin: 0;
+
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .hero h1 span {
+      color: var(--primary-hover);
+    }
+
+    .hero-lead {
+      max-width: 720px;
+      margin: 28px auto 0;
+
+      color: var(--subtext);
+      font-size: 1.08rem;
+    }
+
+    .hero-lead-jp {
+      max-width: 760px;
+      margin: 10px auto 0;
+
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+
+      margin-top: 30px;
+    }
+
+    .badge {
+      padding: 6px 12px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: rgba(37, 38, 43, 0.75);
+
+      color: var(--subtext);
+      font-size: 0.82rem;
+    }
+
+    /* =========================================================
+       SECTION
+       ========================================================= */
+
+    .section {
+      padding: 25px 0 70px;
+    }
+
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-eyebrow {
+      margin-bottom: 6px;
+
+      color: var(--primary-hover);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+      margin-top: 7px;
       color: var(--subtext);
     }
 
-    .projects {
+    /* =========================================================
+       APP CARDS
+       ========================================================= */
+
+    .apps {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      gap: 22px;
     }
 
-    .card {
-      background: var(--card);
+    .app-card {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+
+      min-height: 420px;
+      padding: 30px;
+
+      overflow: hidden;
+
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      border-radius: var(--radius);
+
+      background: var(--card);
+
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
     }
 
-    .card h2 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 1.5rem;
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: #4A4C54;
+      background: var(--card-hover);
     }
 
-    .card .abbr {
+    .app-card::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 3px;
+
+      background: var(--primary);
+    }
+
+    .app-card.tiv::before {
+      background: var(--secondary);
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .app-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 58px;
+      height: 58px;
+
+      border-radius: 13px;
+
+      background: rgba(76, 110, 245, 0.13);
+      border: 1px solid rgba(76, 110, 245, 0.25);
+
+      color: #9FB2FF;
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .tiv .app-icon {
+      color: #7BD8E4;
+      background: rgba(16, 152, 173, 0.13);
+      border-color: rgba(16, 152, 173, 0.25);
+    }
+
+    .free-label {
+      padding: 5px 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
       color: var(--subtext);
-      font-size: 0.95rem;
+      font-size: 0.76rem;
+    }
+
+    .app-card h2 {
+      margin: 0 0 4px;
+      font-size: 1.55rem;
+    }
+
+    .app-name-jp {
+      color: var(--muted);
+      font-size: 0.87rem;
       margin-bottom: 18px;
     }
 
-    .card p {
-      margin: 0 0 18px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--soft);
-      font-weight: 600;
-    }
-
-    .button:hover {
-      background: #eef0f3;
-    }
-
-    .button.primary {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .button.primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .support {
-      margin-top: 32px;
-      text-align: center;
-    }
-
-    .support h2 {
-      margin-top: 0;
-    }
-
-    .notice {
-      margin-top: 18px;
+    .description {
+      margin: 0 0 14px;
       color: var(--subtext);
-      font-size: 0.95rem;
     }
 
-    footer {
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      color: var(--subtext);
+    .description-jp {
+      margin: 0;
+      color: var(--muted);
       font-size: 0.92rem;
     }
 
-    footer a {
-      color: #50627a;
-      margin: 0 8px;
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+
+      margin-top: 22px;
+    }
+
+    .feature {
+      padding: 4px 9px;
+
+      border-radius: 6px;
+      background: var(--surface);
+
+      color: var(--subtext);
+      font-size: 0.76rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+
+      margin-top: auto;
+      padding-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 42px;
+      padding: 9px 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: var(--surface);
+
+      color: var(--text);
+      text-decoration: none;
+
+      font-size: 0.88rem;
+      font-weight: 600;
+
+      transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    .button:hover {
+      background: #303136;
+      border-color: #555860;
+    }
+
+    .button.primary {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    .button.primary:hover {
+      border-color: var(--primary-hover);
+      background: var(--primary-hover);
+    }
+
+    .tiv .button.primary {
+      background: var(--secondary);
+      border-color: var(--secondary);
+    }
+
+    .tiv .button.primary:hover {
+      background: #15AABF;
+      border-color: #15AABF;
+    }
+
+    /* =========================================================
+       SUPPORT
+       ========================================================= */
+
+    .support-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+
+      margin-top: 10px;
+      padding: 34px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(132, 94, 247, 0.08),
+          rgba(76, 110, 245, 0.04)
+        ),
+        var(--card);
+    }
+
+    .support-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.45rem;
+    }
+
+    .support-card p {
+      margin: 5px 0;
+      color: var(--subtext);
+    }
+
+    .support-note {
+      margin-top: 10px !important;
+      color: var(--muted) !important;
+      font-size: 0.86rem;
+    }
+
+    .support-button {
+      white-space: nowrap;
+      padding: 12px 20px;
+
+      border-radius: 9px;
+
+      background: var(--purple);
+      border: 1px solid var(--purple);
+
+      color: white;
+      font-weight: 700;
       text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .support-button:hover {
+      background: #9775FA;
     }
 
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      padding: 26px 0 42px;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-links a {
+      color: var(--subtext);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
     @media (max-width: 760px) {
-      .projects {
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .apps {
         grid-template-columns: 1fr;
       }
 
-      .container {
-        padding: 32px 16px;
+      .support-card {
+        grid-template-columns: 1fr;
       }
 
-      header h1 {
-        font-size: 1.9rem;
+      .support-button {
+        text-align: center;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -177,185 +516,309 @@
 
 <body>
 
-  <div class="container">
+  <main>
 
-    <header>
-      <h1>T2Y Applications</h1>
+    <!-- =======================================================
+         HERO
+         ======================================================= -->
 
-      <p>
-        Free Windows applications for AI image workflows and image management.
-      </p>
+    <section class="hero">
+      <div class="container">
 
-      <p>
-        AI画像制作・LoRA学習・画像管理を支援する
-        無料Windowsアプリケーションを開発しています。
-      </p>
-    </header>
-
-
-    <section class="projects">
-
-      <article class="card">
-
-        <h2>LoRA Tagging Assistant</h2>
-        <div class="abbr">LTA</div>
-
-        <p>
-          A Windows application for tagging, captioning,
-          and preparing datasets for LoRA training.
-        </p>
-
-        <p>
-          LoRA学習用データセットのタグ付け、
-          キャプション作成、整理を支援するWindowsアプリケーションです。
-        </p>
-
-        <div class="buttons">
-
-          <a
-            class="button primary"
-            href="https://github.com/tantan2yuri/lora-tagging-assistant/releases/latest"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download / GitHub
-          </a>
-
-          <a
-            class="button"
-            href="https://github.com/tantan2yuri/lora-tagging-assistant"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Repository
-          </a>
-
+        <div class="brand">
+          <span class="brand-dot"></span>
+          Free Windows Software
         </div>
 
-      </article>
+        <h1>
+          T2Y <span>Applications</span>
+        </h1>
 
-
-      <article class="card">
-
-        <h2>T2Y Image Viewer</h2>
-        <div class="abbr">TIV</div>
-
-        <p>
-          A fast Windows image viewer and library manager
-          for browsing, organizing, searching, and tagging
-          large image collections.
+        <p class="hero-lead">
+          Tools for AI image workflows, dataset preparation,
+          image browsing and library management.
         </p>
 
-        <p>
-          大量の画像を快適に閲覧・整理・検索・タグ管理するための
-          Windows向け画像ビューア／ライブラリ管理ツールです。
+        <p class="hero-lead-jp">
+          AI画像制作・LoRA学習用データセット作成・画像閲覧・管理を支援する
+          Windowsアプリケーションを開発しています。
         </p>
 
-        <div class="buttons">
-
-          <a
-            class="button primary"
-            href="https://github.com/tantan2yuri/T2Y-Image-Viewer/releases/latest"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Download / GitHub
-          </a>
-
-          <a
-            class="button"
-            href="https://github.com/tantan2yuri/T2Y-Image-Viewer"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Repository
-          </a>
-
+        <div class="badges">
+          <span class="badge">Windows</span>
+          <span class="badge">Free</span>
+          <span class="badge">No feature restrictions</span>
+          <span class="badge">Japanese / English</span>
         </div>
 
-      </article>
-
+      </div>
     </section>
 
 
-    <section class="card support">
+    <!-- =======================================================
+         APPLICATIONS
+         ======================================================= -->
 
-      <h2>Support Development / 開発を応援する</h2>
+    <section class="section">
+      <div class="container">
 
-      <p>
-        All T2Y Applications are available free of charge.
-      </p>
+        <div class="section-header">
 
-      <p>
-        T2Y Applications のすべてのアプリ・機能は無料で利用できます。
-      </p>
+          <div class="section-eyebrow">
+            Applications
+          </div>
 
-      <p>
-        If you find these applications useful,
-        you can optionally support continued development,
-        testing, maintenance, and improvements through Ko-fi.
-      </p>
+          <h2 class="section-title">
+            Available Apps
+          </h2>
 
-      <p>
-        もし役に立ったと感じていただけたら、
-        今後の開発・テスト・保守・機能改善を
-        任意のTipで応援していただけると嬉しいです。
-      </p>
+          <div class="section-subtitle">
+            T2Y Applicationsで公開しているWindowsアプリケーション
+          </div>
 
-      <div class="buttons" style="justify-content:center;">
+        </div>
+
+
+        <div class="apps">
+
+          <!-- LTA -->
+
+          <article class="app-card">
+
+            <div class="app-top">
+
+              <div class="app-icon">
+                LTA
+              </div>
+
+              <div class="free-label">
+                FREE
+              </div>
+
+            </div>
+
+            <h2>
+              LoRA Tagging Assistant
+            </h2>
+
+            <div class="app-name-jp">
+              LoRA学習用データセット作成支援
+            </div>
+
+            <p class="description">
+              A Windows application for tagging, captioning
+              and preparing image datasets for LoRA training.
+            </p>
+
+            <p class="description-jp">
+              画像への自動タグ付け、タグ編集、キャプション作成など、
+              LoRA学習用データセットの作成を支援します。
+            </p>
+
+            <div class="features">
+              <span class="feature">Auto Tagging</span>
+              <span class="feature">Captioning</span>
+              <span class="feature">Dataset Tools</span>
+              <span class="feature">LoRA</span>
+            </div>
+
+            <div class="actions">
+
+              <a
+                class="button primary"
+                href="https://github.com/tantan2yuri/lora-tagging-assistant/releases/latest"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+              </a>
+
+              <a
+                class="button"
+                href="https://github.com/tantan2yuri/lora-tagging-assistant"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- TIV -->
+
+          <article class="app-card tiv">
+
+            <div class="app-top">
+
+              <div class="app-icon">
+                TIV
+              </div>
+
+              <div class="free-label">
+                FREE
+              </div>
+
+            </div>
+
+            <h2>
+              T2Y Image Viewer
+            </h2>
+
+            <div class="app-name-jp">
+              画像ビューア / ライブラリ管理
+            </div>
+
+            <p class="description">
+              A fast Windows image viewer and library manager
+              designed for large image collections.
+            </p>
+
+            <p class="description-jp">
+              大量の画像を快適に閲覧・整理・検索し、
+              メタデータやタグを管理できる画像ビューアです。
+            </p>
+
+            <div class="features">
+              <span class="feature">Image Viewer</span>
+              <span class="feature">Tag Search</span>
+              <span class="feature">Metadata</span>
+              <span class="feature">Large Libraries</span>
+            </div>
+
+            <div class="actions">
+
+              <a
+                class="button primary"
+                href="https://github.com/tantan2yuri/T2Y-Image-Viewer/releases/latest"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+              </a>
+
+              <a
+                class="button"
+                href="https://github.com/tantan2yuri/T2Y-Image-Viewer"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =======================================================
+         SUPPORT
+         ======================================================= -->
+
+    <section class="section">
+      <div class="container">
+
+        <div class="support-card">
+
+          <div>
+
+            <h2>
+              Support Development
+            </h2>
+
+            <p>
+              All T2Y Applications are available free of charge.
+            </p>
+
+            <p>
+              T2Y Applicationsは、すべての機能を無料で公開しています。
+            </p>
+
+            <p>
+              If you find these apps useful,
+              you can optionally support continued development,
+              testing and improvements.
+            </p>
+
+            <p class="support-note">
+              Tips are completely optional.
+              There are no supporter-only features or feature restrictions.
+            </p>
+
+          </div>
+
+
+          <a
+            class="support-button"
+            href="https://ko-fi.com/tantan2yuri"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Support on Ko-fi
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        © T2Y Applications
+      </div>
+
+      <div class="footer-links">
 
         <a
-          class="button primary"
+          href="https://github.com/tantan2yuri"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+
+        <a
           href="https://ko-fi.com/tantan2yuri"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Support on Ko-fi
+          Ko-fi
+        </a>
+
+        <a href="/legal/privacy.html">
+          Privacy
+        </a>
+
+        <a href="/legal/terms.html">
+          Terms
+        </a>
+
+        <a href="/legal/tokushoho.html">
+          特定商取引法に基づく表記
         </a>
 
       </div>
 
-      <p class="notice">
-        Tips are completely optional and do not unlock additional features
-        or supporter-only content.
-        <br>
-        Tipの有無による機能制限や支援者限定機能はありません。
-      </p>
+    </div>
 
-    </section>
-
-
-    <footer>
-
-      <p>
-        © T2Y Applications
-      </p>
-
-      <p>
-        <a href="https://github.com/tantan2yuri" target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-
-        <a href="https://ko-fi.com/tantan2yuri" target="_blank" rel="noopener noreferrer">
-          Ko-fi
-        </a>
-
-        <a href="https://tantan2yuri.github.io/legal/privacy.html">
-          Privacy Policy
-        </a>
-
-        <a href="https://tantan2yuri.github.io/legal/terms.html">
-          Terms
-        </a>
-
-        <a href="https://tantan2yuri.github.io/legal/tokushoho.html">
-          特定商取引法に基づく表記
-        </a>
-      </p>
-
-    </footer>
-
-  </div>
+  </footer>
 
 </body>
 </html>
